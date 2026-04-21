@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HakanMariya A.Ş. — Mimari Projeler</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Crimson+Pro:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1b2a;
+      --navy-mid: #1b2e42;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --cream: #f5f0e8;
+      --cream-dark: #ede6d6;
+      --text-dark: #1a1a1a;
+      --text-mid: #444;
+      --text-light: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Crimson Pro', serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 5%;
+      background: rgba(13,27,42,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(201,168,76,0.25);
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+    .logo span { color: #fff; font-weight: 400; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.95rem; letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold) !important;
+      padding: 0.45rem 1.2rem;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      padding: 8rem 5% 5rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 50%, rgba(201,168,76,0.07) 0%, transparent 70%),
+        repeating-linear-gradient(
+          90deg,
+          transparent, transparent 79px,
+          rgba(255,255,255,0.025) 80px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          transparent, transparent 79px,
+          rgba(255,255,255,0.025) 80px
+        );
+    }
+    .hero-line {
+      position: absolute; left: 5%; top: 0; bottom: 0;
+      width: 1px; background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+      opacity: 0.3;
+    }
+    .hero-content { position: relative; max-width: 680px; }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(201,168,76,0.4);
+      padding: 0.35rem 0.9rem; margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      line-height: 1.15; color: #fff; font-weight: 700;
+      margin-bottom: 1.8rem;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+    h1 em { color: var(--gold); font-style: normal; }
+    .hero-sub {
+      font-size: 1.2rem; line-height: 1.8;
+      color: rgba(255,255,255,0.65);
+      max-width: 520px; margin-bottom: 3rem;
+      font-weight: 300;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.8s 0.45s ease both; }
+    .btn-primary {
+      background: var(--gold); color: var(--navy);
+      padding: 0.9rem 2.4rem; border: none; cursor: pointer;
+      font-family: 'Crimson Pro', serif; font-size: 1rem; font-weight: 500;
+      letter-spacing: 0.04em; border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+      text-decoration: none;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: rgba(255,255,255,0.8);
+      padding: 0.9rem 2.4rem; border: 1px solid rgba(255,255,255,0.3); cursor: pointer;
+      font-family: 'Crimson Pro', serif; font-size: 1rem; font-weight: 400;
+      letter-spacing: 0.04em; border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+      text-decoration: none;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── STATS ── */
+    #stats {
+      background: var(--navy-mid);
+      padding: 3.5rem 5%;
+      border-top: 1px solid rgba(201,168,76,0.2);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2rem; max-width: 1100px; margin: 0 auto;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem; font-weight: 700; color: var(--gold);
+    }
+    .stat-label {
+      font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); margin-top: 0.3rem;
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 7rem 5%; }
+    .section-tag {
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.8rem; display: block;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      line-height: 1.2; font-weight: 700; color: var(--navy);
+      margin-bottom: 1.2rem;
+    }
+    .section-intro {
+      font-size: 1.1rem; line-height: 1.85; color: var(--text-mid);
+      max-width: 560px; font-weight: 300;
+    }
+
+    /* ── HIZMETLER ── */
+    #hizmetler { background: var(--cream); }
+    .services-layout {
+      display: grid; grid-template-columns: 1fr 2fr;
+      gap: 5rem; align-items: start; max-width: 1200px; margin: 4rem auto 0;
+    }
+    .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--cream-dark);
+      padding: 2rem 1.8rem;
+      border-radius: 2px;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--gold); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .service-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); border-color: transparent; }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .service-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 600; color: var(--navy);
+      margin-bottom: 0.6rem;
+    }
+    .service-card p { font-size: 0.97rem; line-height: 1.7; color: var(--text-mid); }
+
+    /* ── HAKKIMIZDA ── */
+    #hakkimizda { background: var(--navy); }
+    #hakkimizda h2 { color: #fff; }
+    #hakkimizda .section-intro { color: rgba(255,255,255,0.6); max-width: 100%; }
+    .about-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6rem; align-items: center; max-width: 1200px; margin: 4rem auto 0;
+    }
+    .about-visual {
+      position: relative; aspect-ratio: 4/5;
+      background: var(--navy-mid);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 2px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-visual-inner {
+      text-align: center; padding: 2rem;
+    }
+    .about-visual-inner .big-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem; font-weight: 700; color: rgba(201,168,76,0.15);
+      line-height: 1;
+    }
+    .about-visual-inner .big-label {
+      font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); margin-top: 0.5rem;
+    }
+    .about-corner {
+      position: absolute; bottom: 1.5rem; right: 1.5rem;
+      width: 60px; height: 60px;
+      border-right: 2px solid rgba(201,168,76,0.4);
+      border-bottom: 2px solid rgba(201,168,76,0.4);
+    }
+    .about-corner2 {
+      position: absolute; top: 1.5rem; left: 1.5rem;
+      width: 60px; height: 60px;
+      border-left: 2px solid rgba(201,168,76,0.4);
+      border-top: 2px solid rgba(201,168,76,0.4);
+    }
+    .values-list { list-style: none; margin-top: 2rem; }
+    .values-list li {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.2rem 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .values-list li:last-child { border-bottom: none; }
+    .val-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; color: var(--gold); opacity: 0.6;
+      line-height: 1; min-width: 2rem;
+    }
+    .val-text h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; color: #fff; margin-bottom: 0.25rem;
+    }
+    .val-text p { font-size: 0.92rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+    /* ── NEDEN BİZ ── */
+    #neden { background: var(--cream-dark); }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 2rem; max-width: 1100px; margin: 4rem auto 0;
+    }
+    .why-card {
+      background: var(--cream);
+      padding: 2.5rem 2rem;
+      border-radius: 2px;
+      border: 1px solid rgba(0,0,0,0.07);
+    }
+    .why-card .wnum {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem; color: var(--gold); opacity: 0.3;
+      line-height: 1; margin-bottom: 1rem;
+    }
+    .why-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; color: var(--navy); margin-bottom: 0.7rem;
+    }
+    .why-card p { font-size: 0.97rem; line-height: 1.75; color: var(--text-mid); }
+
+    /* ── İLETİŞİM ── */
+    #iletisim { background: var(--navy); }
+    #iletisim h2 { color: #fff; }
+    #iletisim .section-intro { color: rgba(255,255,255,0.55); }
+    .contact-layout {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 5rem; max-width: 1100px; margin: 4rem auto 0;
+    }
+    .contact-info { }
+    .contact-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+    .contact-item .ci-icon {
+      width: 40px; height: 40px; min-width: 40px;
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .contact-item .ci-body h4 {
+      font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.25rem;
+    }
+    .contact-item .ci-body p { color: rgba(255,255,255,0.7); font-size: 1rem; }
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      padding: 0.85rem 1rem;
+      font-family: 'Crimson Pro', serif; font-size: 1rem;
+      border-radius: 2px; width: 100%;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: rgba(255,255,255,0.3); }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--gold); }
+    .contact-form textarea { resize: vertical; min-height: 130px; }
+    .contact-form .btn-primary { align-self: flex-start; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #070f17;
+      padding: 3rem 5%;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold); }
+    .footer-copy { font-size: 0.85rem; color: rgba(255,255,255,0.3); }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: 0.82rem; color: rgba(255,255,255,0.35);
+      text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .services-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 560px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">HakanMariya<span> A.Ş.</span></div>
+  <ul class="nav-links">
+    <li><a href="#hizmetler">Hizmetler</a></li>
+    <li><a href="#hakkimizda">Hakkımızda</a></li>
+    <li><a href="#neden">Neden Biz</a></li>
+    <li><a href="#iletisim" class="nav-cta">İletişim</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Mimari Tasarım & Proje Hizmetleri</span>
+    <h1>Hayalinizdeki Yapıyı <em>Biz</em> Tasarlıyoruz</h1>
+    <p class="hero-sub">
+      İstanbul merkezli HakanMariya A.Ş. olarak 50'yi aşkın mimari projede imzamız var. Estetik, işlevsellik ve mühendislik mükemmelliğini bir arada sunuyoruz.
+    </p>
+    <div class="hero-actions">
+      <a href="#iletisim" class="btn-primary">Ücretsiz Keşif Görüşmesi</a>
+      <a href="#hizmetler" class="btn-outline">Hizmetlerimiz</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="stat-num">50+</div>
+      <div class="stat-label">Tamamlanan Proje</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">İstanbul</div>
+      <div class="stat-label">Merkez Ofis</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">%100</div>
+      <div class="stat-label">Müşteri Memnuniyeti</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">360°</div>
+      <div class="stat-label">Mimari Çözüm</div>
+    </div>
+  </div>
+</div>
+
+<!-- HİZMETLER -->
+<section id="hizmetler">
+  <div class="reveal">
+    <span class="section-tag">Ne Sunuyoruz</span>
+    <h2>Hizmetlerimiz</h2>
+    <p class="section-intro">
+      Konuttan ticarete, iç mekândan peyzaja kadar her ölçekte mimari çözümler üretiyoruz.
+    </p>
+  </div>
+  <div class="services-layout">
+    <div></div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-icon">🏠</div>
+        <h3>Konut Projeleri</h3>
+        <p>Villa, rezidans ve müstakil konut projelerinde yaşam alanlarınızı estetik ve işlevsel biçimde tasarlıyoruz.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏢</div>
+        <h3>Ticari Yapılar</h3>
+        <p>Ofis, AVM, otel ve endüstriyel yapılar için kurumsal kimliğinizi yansıtan mimari çözümler.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📐</div>
+        <h3>Rölöve & Restorasyon</h3>
+        <p>Tarihi yapıların belgelenmesi ve özgün dokusunu koruyarak günümüz ihtiyaçlarına uygun hale getirilmesi.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🪟</div>
+        <h3>İç Mimari</h3>
+        <p>Mekânlarınızın iç düzenlemesini işlevsellik ve estetik dengesini gözeterek tasarlıyoruz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HAKKIMIZDA -->
+<section id="hakkimizda">
+  <span class="section-tag" style="color:var(--gold)">Biz Kimiz</span>
+  <h2>Hakkımızda</h2>
+  <div class="about-layout">
+    <div class="about-visual reveal">
+      <div class="about-corner2"></div>
+      <div class="about-visual-inner">
+        <div class="big-num">50</div>
+        <div class="big-label">Mimari Proje</div>
+      </div>
+      <div class="about-corner"></div>
+    </div>
+    <div class="reveal">
+      <p class="section-intro" style="margin-bottom:2rem">
+        HakanMariya A.Ş. olarak İstanbul merkezli mimarlık ofisimizde konut, ticari yapı ve restorasyon alanlarında 50'yi aşkın proje hayata geçirdik. Tasarımda özgünlük, projede titizlik ve müşteride memnuniyet temel ilkelerimizdir.
+      </p>
+      <ul class="values-list">
+        <li>
+          <span class="val-num">01</span>
+          <div class="val-text">
+            <h4>Özgün Tasarım</h4>
+            <p>Her proje kendine özgüdür; hazır şablon değil, size özel mimari kimlik yaratıyoruz.</p>
+          </div>
+        </li>
+        <li>
+          <span class="val-num">02</span>
+          <div class="val-text">
+            <h4>Teknik Titizlik</h4>
+            <p>Projelerimiz, yapı denetimi ve ruhsat süreçleriyle tam uyumlu biçimde hazırlanır.</p>
+          </div>
+        </li>
+        <li>
+          <span class="val-num">03</span>
+          <div class="val-text">
+            <h4>Zamanında Teslimat</h4>
+            <p>Belirlenen takvime sadık kalarak projelerinizi eksiksiz teslim ediyoruz.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- NEDEN BİZ -->
+<section id="neden">
+  <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto;">
+    <span class="section-tag">Farkımız</span>
+    <h2>Neden Bizi Seçmelisiniz?</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="wnum">01</div>
+      <h3>50+ Tamamlanmış Proje</h3>
+      <p>İstanbul ve çevresinde konut, ticari ve endüstriyel alanlarda 50'yi aşkın başarılı projeyle güvenilirliğimizi kanıtladık.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="wnum">02</div>
+      <h3>Uçtan Uca Hizmet</h3>
+      <p>Fikir aşamasından ruhsat alımına, şantiye denetimine kadar tüm süreci sizin adınıza yönetiyoruz.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="wnum">03</div>
+      <h3>Size Özel Tasarım</h3>
+      <p>Her müşterinin ihtiyacı, bütçesi ve vizyonu farklıdır. Biz de her proje için sıfırdan özgün çözümler üretiyoruz.</p>
+    </div>
+  </div>
+</section>
+
+<!-- İLETİŞİM -->
+<section id="iletisim">
+  <span class="section-tag">Bize Ulaşın</span>
+  <h2>İletişim</h2>
+  <p class="section-intro">Projenizi konuşmak için bize ulaşın. İlk görüşme ücretsizdir.</p>
+  <div class="contact-layout">
+    <div class="contact-info reveal">
+      <div class="contact-item">
+        <div class="ci-icon">📍</div>
+        <div class="ci-body">
+          <h4>Adres</h4>
+          <p>Maslak Mah. Büyükdere Cad. No:123<br>Sarıyer / İstanbul</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="ci-icon">📞</div>
+        <div class="ci-body">
+          <h4>Telefon</h4>
+          <p>+90 (212) 555 00 00</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="ci-icon">✉️</div>
+        <div class="ci-body">
+          <h4>E-posta</h4>
+          <p>info@hakanmariya.com.tr</p>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <input type="text" placeholder="Adınız Soyadınız"/>
+        <input type="email" placeholder="E-posta Adresiniz"/>
+      </div>
+      <input type="text" placeholder="Firmanızın Adı"/>
+      <textarea placeholder="Mesajınız…"></textarea>
+      <button class="btn-primary" onclick="alert('Mesajınız alındı, en kısa sürede dönüş yapacağız.')">Mesaj Gönder</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">HakanMariya A.Ş.</div>
+  <div class="footer-copy">© 2025 HakanMariya A.Ş. Tüm hakları saklıdır.</div>
+  <div class="footer-links">
+    <a href="#hizmetler">Hizmetler</a>
+    <a href="#hakkimizda">Hakkımızda</a>
+    <a href="#iletisim">İletişim</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
